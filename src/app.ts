@@ -8,7 +8,14 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// src/app.ts
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok', message: 'Backend is running' });
+});
+
 app.use('/api', apiRouter);
+
 app.use(errorHandler);
 
 // Only listen locally; on Vercel, app is handled by the platform
