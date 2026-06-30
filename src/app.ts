@@ -8,11 +8,14 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
 app.use('/api', apiRouter);
-
 app.use(errorHandler);
 
-app.listen(env.port, () => {
-  console.log(`API running on port ${env.port}`);
-});
+// Only listen locally; on Vercel, app is handled by the platform
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(env.port, () => {
+    console.log(`API running on port ${env.port}`);
+  });
+}
+
+export default app;
